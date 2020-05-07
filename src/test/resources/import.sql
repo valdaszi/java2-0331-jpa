@@ -1,0 +1,2 @@
+INSERT INTO klientai(name) VALUES ('Microsoft'),('IBM'),('Google'),('Facebook'),('SpaceX'),('Oracle');
+INSERT INTO pardavimai(data,kliento_id,suma) VALUES ('2020-01-01',1,200.99),('2020-01-02',1,1000.99),('2020-01-01',2,2000.00),('2020-01-01',3,0.99);

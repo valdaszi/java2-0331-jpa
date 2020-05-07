@@ -12,7 +12,6 @@ public class Client {
     @Column(length = 100)
     private String name;
 
-
     public Integer getId() {
         return id;
     }
@@ -21,6 +20,7 @@ public class Client {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
@@ -28,4 +28,5 @@ public class Client {
     public void setName(String name) {
         this.name = name;
     }
+
 }
