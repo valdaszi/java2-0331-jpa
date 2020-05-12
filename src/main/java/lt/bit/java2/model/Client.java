@@ -1,6 +1,7 @@
 package lt.bit.java2.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "klientai")
@@ -11,6 +12,12 @@ public class Client {
 
     @Column(length = 100)
     private String name;
+
+    // LAZY (default OneToMany)  - t.y. join'as negeneruojamas ir
+    // informacija traukima tik kai jos prireikia
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    List<Invoice> invoices;
+
 
     public Integer getId() {
         return id;
@@ -29,4 +36,11 @@ public class Client {
         this.name = name;
     }
 
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
 }

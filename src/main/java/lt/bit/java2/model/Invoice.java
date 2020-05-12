@@ -14,8 +14,13 @@ public class Invoice {
     @Column(name = "data")
     private LocalDate date;
 
-    @Column(name = "kliento_id")
-    private Integer clientId;
+//    @Column(name = "kliento_id")
+//    private Integer clientId;
+
+    // EAGER (default ManyToOne) - visada generuojamas select su join
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "kliento_id")
+    private Client client;
 
     @Column(name = "suma")
     private BigDecimal sum;
@@ -37,12 +42,21 @@ public class Invoice {
         this.date = date;
     }
 
-    public Integer getClientId() {
-        return clientId;
+//    public Integer getClientId() {
+//        return clientId;
+//    }
+//
+//    public void setClientId(Integer clientId) {
+//        this.clientId = clientId;
+//    }
+
+
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public BigDecimal getSum() {
