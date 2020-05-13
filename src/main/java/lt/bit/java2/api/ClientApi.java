@@ -2,10 +2,6 @@ package lt.bit.java2.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lt.bit.java2.model.Client;
 import lt.bit.java2.services.DBService;
 import lt.bit.java2.services.JsonService;
@@ -14,10 +10,10 @@ import javax.persistence.EntityManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public interface ClientApi {
+public class ClientApi {
 
-    // static Logger LOG = Logger.getLogger("lt.bit.java2.api.ClientApi");
-    static Logger LOG = Logger.getLogger(ClientApi.class.getName());
+    private static final Logger LOG = Logger.getLogger(ClientApi.class.getName());
+
 
     public static void main(String[] args) throws JsonProcessingException {        Logger.getLogger("").setLevel(Level.WARNING);
         Logger.getLogger("").setLevel(Level.WARNING);

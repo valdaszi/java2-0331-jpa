@@ -12,7 +12,7 @@ public class OneToOneTest extends BaseTest {
 
     @Test
     public void createClientEx() throws SQLException {
-        dbServiceTest.executeInTransaction(entityManager -> {
+        DBServiceTest.executeInTransaction(entityManager -> {
 
             ClientEx clientEx = new ClientEx();
             clientEx.setPastaba("labai slapta zinute");
@@ -27,18 +27,17 @@ public class OneToOneTest extends BaseTest {
             return null;
         });
 
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         Client client = em.find(Client.class, 4);
 
         Assert.assertEquals("123", client.getClientEx().getTelefonas());
 
         em.close();
-        dbServiceTest.close();
     }
 
     @Test
     public void deleteClientAll() throws SQLException {
-        dbServiceTest.executeInTransaction(entityManager -> {
+        DBServiceTest.executeInTransaction(entityManager -> {
 
             ClientEx clientEx = new ClientEx();
             clientEx.setPastaba("labai slapta zinute");
@@ -53,12 +52,12 @@ public class OneToOneTest extends BaseTest {
             return null;
         });
 
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         ClientEx clientEx = em.find(ClientEx.class, 4);
         Assert.assertNotNull(clientEx);
         em.close();
 
-        dbServiceTest.executeInTransaction(entityManager -> {
+        DBServiceTest.executeInTransaction(entityManager -> {
 
             Client client = entityManager.find(Client.class, 4);
             entityManager.remove(client);
@@ -66,12 +65,10 @@ public class OneToOneTest extends BaseTest {
             return null;
         });
 
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
         clientEx = em.find(ClientEx.class, 4);
         Assert.assertNull(clientEx);
         em.close();
-
-        dbServiceTest.close();
     }
 
 }

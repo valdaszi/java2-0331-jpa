@@ -13,7 +13,7 @@ public class OneToManyTest extends BaseTest {
 
     @Test
     public void readClient() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
 
         Client client = em.find(Client.class, 1);
         Assert.assertEquals("Microsoft", client.getName());
@@ -22,24 +22,22 @@ public class OneToManyTest extends BaseTest {
         Assert.assertEquals(BigDecimal.valueOf(1000.99), client.getInvoices().get(1).getSum());
 
         em.close();
-        dbServiceTest.close();
     }
 
     @Test
     public void readInvoice() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
 
         Invoice invoice = em.find(Invoice.class, 2);
         Assert.assertEquals(BigDecimal.valueOf(1000.99), invoice.getSum());
         Assert.assertEquals("Microsoft", invoice.getClient().getName());
 
         em.close();
-        dbServiceTest.close();
     }
 
     @Test
     public void createInvoice() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
 
         // Kuriame is Invoice puses
         em.getTransaction().begin();
@@ -69,14 +67,12 @@ public class OneToManyTest extends BaseTest {
         // Patikriname ar tikrai klientas su id = 1 (Microsoft)
         // dabar turi jau 3 invoisus
 
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
 
         Client c1 = em.find(Client.class, 1);
         Assert.assertEquals(3, c1.getInvoices().size());
 
         em.close();
-
-        dbServiceTest.close();
     }
 
     /**
@@ -85,7 +81,7 @@ public class OneToManyTest extends BaseTest {
      */
     @Test
     public void createInvoiceWithNonExistingClient() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
 
         // 1. Kuriame is Invoice puses
         em.getTransaction().begin();
@@ -109,7 +105,6 @@ public class OneToManyTest extends BaseTest {
         }
 
         em.close();
-        dbServiceTest.close();
     }
 
 }

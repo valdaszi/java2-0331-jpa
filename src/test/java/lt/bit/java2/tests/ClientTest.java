@@ -14,14 +14,12 @@ public class ClientTest extends BaseTest {
 
     @Test
     public void readClient() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         Assert.assertNotNull(em);
 
         Client client = em.find(Client.class, 1);
         Assert.assertNotNull(client);
         Assert.assertEquals("Microsoft", client.getName());
-
-        dbServiceTest.close();
     }
 
 
@@ -32,7 +30,7 @@ public class ClientTest extends BaseTest {
     @Test
     public void insertClient() {
         // 1. gaunam EntityManager ir pradedam tranzakcija
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         em.getTransaction().begin();
 
         // 2. Atliekam reikiamus veiksmus
@@ -51,19 +49,17 @@ public class ClientTest extends BaseTest {
         Assert.assertNotNull(client.getId());
 
         // Bandime nuskaityti klienta su nauju id ir patikrinti ar vardas sutampa
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
         Client c2 = em.find(Client.class, client.getId());
         em.close();
 
         Assert.assertEquals("AB Ragai ir Kanopos", c2.getName());
-
-        dbServiceTest.close();
     }
 
     @Test
     public void deleteClient() {
         // 1. gaunam EntityManager ir pradedam tranzakcija
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         em.getTransaction().begin();
 
         try {
@@ -88,18 +84,16 @@ public class ClientTest extends BaseTest {
         }
 
         // Patikriname ar is tikruju istryneme
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
         Client client = em.find(Client.class, 4);
         Assert.assertNull(client);
         em.close();
-
-        dbServiceTest.close();
     }
 
 
     @Test
     public void updateClient() throws SQLException {
-        dbServiceTest.executeInTransaction(em -> {
+        DBServiceTest.executeInTransaction(em -> {
             // 1. nuskaityti norima pakeisti entity
             Client client = em.find(Client.class, 2);
 
@@ -112,36 +106,34 @@ public class ClientTest extends BaseTest {
             return null;
         });
 
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         Client client = em.find(Client.class, 2);
         Assert.assertEquals("Maxima", client.getName());
-
-        dbServiceTest.close();
     }
 
     @Test
     public void mergeClient() throws SQLException {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         Client client = em.find(Client.class, 2);
         em.close();
 
         Assert.assertEquals("IBM", client.getName());
         client.setName("Rimi");
 
-        dbServiceTest.executeInTransaction(entityManager -> {
+        DBServiceTest.executeInTransaction(entityManager -> {
             // entityManager.persist(client);
             entityManager.merge(client);
             return client;
         });
 
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
         Client client2 = em.find(Client.class, 2);
         Assert.assertEquals("Rimi", client2.getName());
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void testGetReference() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
 
         Client client = em.getReference(Client.class, 1);
         Assert.assertNotNull(client);
@@ -162,15 +154,13 @@ public class ClientTest extends BaseTest {
         Assert.assertNotNull(client);
         Assert.assertEquals(Integer.valueOf(100), client.getId());
         client.getName();
-
-        dbServiceTest.close();
     }
 
     @Test
     public void managedEntitiesTest() throws SQLException {
         // jei nieko nekeiciame tai niekas neturetu buti saugojama
         // t.y. neturetu buti generuojami SQL UPDATE
-        dbServiceTest.executeInTransaction(em -> {
+        DBServiceTest.executeInTransaction(em -> {
             // 1. nuskaityti norima pakeisti entity
             Client client = em.find(Client.class, 1);
 
@@ -186,7 +176,7 @@ public class ClientTest extends BaseTest {
 
         // jei kazkoki lauka pakeiciame tai mums nebutina kviesti persist metoda
 
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         em.getTransaction().begin();
 
         // 1. nuskaityti norima pakeisti entity
@@ -208,7 +198,5 @@ public class ClientTest extends BaseTest {
         // bet entityManager'yje atsiranda to entity valdoma kopija
         Assert.assertNull(client3.getId());
         Assert.assertNotNull(client31.getId());
-
-        dbServiceTest.close();
     }
 }

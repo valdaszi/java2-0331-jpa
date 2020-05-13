@@ -11,29 +11,25 @@ public class InvoiceTest extends BaseTest {
 
     @Test
     public void readInvoice() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         Invoice invoice = em.find(Invoice.class, 1);
         Assert.assertEquals(LocalDate.of(2020, 1, 1), invoice.getDate());
-
-        dbServiceTest.close();
     }
 
 
     @Test
     public void deleteInvoice() {
-        EntityManager em = dbServiceTest.getEntityManager();
+        EntityManager em = DBServiceTest.getEntityManager();
         em.getTransaction().begin();
         Invoice invoice = em.find(Invoice.class, 1);
         em.remove(invoice);
         em.getTransaction().commit();
         em.close();
 
-        em = dbServiceTest.getEntityManager();
+        em = DBServiceTest.getEntityManager();
         invoice = em.find(Invoice.class, 1);
         Assert.assertNull(invoice);
         em.close();
-
-        dbServiceTest.close();
     }
 
 }
