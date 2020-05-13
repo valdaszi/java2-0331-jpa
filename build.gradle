@@ -17,5 +17,13 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.15.Final'
     compile group: 'org.hibernate', name: 'hibernate-hikaricp', version: '5.4.15.Final'
 
+    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.30'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.11.0'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.11.0'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 }

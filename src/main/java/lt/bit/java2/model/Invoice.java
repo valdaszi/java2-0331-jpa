@@ -1,5 +1,7 @@
 package lt.bit.java2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,6 +19,8 @@ public class Invoice {
 //    @Column(name = "kliento_id")
 //    private Integer clientId;
 
+
+    @JsonIgnore // Jackson anotacija kuri reiksia kad sio lauko nereikia serializuoti
     // EAGER (default ManyToOne) - visada generuojamas select su join
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "kliento_id")
