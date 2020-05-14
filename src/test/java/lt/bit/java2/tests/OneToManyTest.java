@@ -60,9 +60,8 @@ public class OneToManyTest extends BaseTest {
         em.close();
 
         // patikriname ar naujas invoice turi sugeneruota id
+        // Jei turi - reiskia kad irasytas i DB
         Assert.assertNotNull(invoice.getId());
-
-        System.out.println("Antra dalis");
 
         // Patikriname ar tikrai klientas su id = 1 (Microsoft)
         // dabar turi jau 3 invoisus

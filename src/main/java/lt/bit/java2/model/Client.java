@@ -1,12 +1,13 @@
 package lt.bit.java2.model;
 
-import lt.bit.java2.api.ClientApi;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "klientai")
+@Data
 public class Client {
 
     @Id
@@ -22,39 +23,11 @@ public class Client {
     List<Invoice> invoices;
 
     @OneToOne(mappedBy = "client", fetch = FetchType.LAZY,
-            cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+            cascade = {
+                    CascadeType.REMOVE, // salinant Client bus pasalintas ir ClientEx
+                    CascadeType.PERSIST // leidzia kurti naujus Client ir ClientEx vienu metu saugojant tiktai Client
+            },
+            orphanRemoval = true)
     private ClientEx clientEx;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Invoice> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
-    }
-
-    public ClientEx getClientEx() {
-        return clientEx;
-    }
-
-    public void setClientEx(ClientEx clientEx) {
-        this.clientEx = clientEx;
-    }
 }

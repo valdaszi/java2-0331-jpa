@@ -6,17 +6,20 @@ import javax.persistence.*;
 @Table(name = "klientai_ex")
 public class ClientEx {
 
-    @Id
     private Integer id;
-
     private String pastaba;
     private String telefonas;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id", referencedColumnName = "id")
     private Client client;
 
+    /*
+        Jei anotuojami geteriai tai hibernate lauku reiksmes skaito/raso
+        naudojant geterius/seterius
+
+        Jei anotuojami laukai - tai hibernate skaito/raso tiesiai is lauku
+        t.y. nenaudoja geteriu/seteriu
+     */
+
+    @Id
     public Integer getId() {
         return id;
     }
@@ -41,6 +44,9 @@ public class ClientEx {
         this.telefonas = telefonas;
     }
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id", referencedColumnName = "id")
     public Client getClient() {
         return client;
     }
