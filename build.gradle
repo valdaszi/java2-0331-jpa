@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'lt.bit.java2'
@@ -12,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
     compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.3'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.15.Final'

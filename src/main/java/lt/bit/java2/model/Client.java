@@ -4,11 +4,25 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "klientai")
 @Data
+@NamedQuery(name = Client.QUERY_ALL, query = "SELECT c FROM Client c")
+// @NamedQuery(...
+// @NamedQuery(...
+@NamedEntityGraph(name = Client.GRAPH_INVOICES,
+        attributeNodes = {
+            @NamedAttributeNode("invoices"),
+            @NamedAttributeNode("clientEx")
+        })
+// @NamedEntityGraph(...
+// @NamedEntityGraph(...
 public class Client {
+
+    public static final String QUERY_ALL = "Client.query.all";
+    public static final String GRAPH_INVOICES = "Client.graph.invoices";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

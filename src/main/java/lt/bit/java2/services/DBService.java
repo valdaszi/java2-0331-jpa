@@ -1,6 +1,8 @@
 package lt.bit.java2.services;
 
 import lt.bit.java2.model.Client;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

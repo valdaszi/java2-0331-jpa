@@ -3,5 +3,6 @@
   <component name="AppEngineStandardGradleModuleComponent">
     <option name="gradleBuildDir" value="$MODULE_DIR$/../../build" />
     <option name="gradleModuleDir" value="$MODULE_DIR$/../.." />
+    <option name="webAppDir" value="src/main/webapp" />
   </component>
 </module>
